@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/Constants/constants.dart';
+import 'package:foodapp/Screens/Signup-Login/components/log_in_valid.dart';
 import 'package:foodapp/Screens/Signup-Login/components/sign_up_auth.dart';
 import 'package:foodapp/Screens/Signup-Login/signup.dart';
 import 'package:foodapp/Screens/welcome.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => SignupAuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginAuthProvider(),
         )
       ],
       child: MaterialApp(

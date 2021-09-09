@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodapp/Constants/constants.dart';
 import 'package:foodapp/Screens/Signup-Login/components/sign_up_auth.dart';
+import 'package:foodapp/Screens/Signup-Login/login.dart';
 import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
@@ -21,11 +22,6 @@ class _SignUpState extends State<SignUp> {
     SignupAuthProvider signupAuthProvider = Provider.of(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        systemOverlayStyle:
-            SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -36,6 +32,9 @@ class _SignUpState extends State<SignUp> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  SizedBox(
+                    height: size.height * 0.07,
+                  ),
                   Text(
                     'Welcome to GoFood!',
                     style: TextStyle(
@@ -119,7 +118,11 @@ class _SignUpState extends State<SignUp> {
                           color: kPrimaryColor,
                         ),
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.visibility, color: kPrimaryColor),
+                          icon: Icon(
+                              visibility
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: kPrimaryColor),
                           onPressed: () {
                             setState(() {
                               visibility = !visibility;
@@ -238,13 +241,28 @@ class _SignUpState extends State<SignUp> {
                         backgroundColor: Colors.white,
                         padding: EdgeInsets.all(12)),
                   ),
+                  SizedBox(
+                    height: size.height * 0.02,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Already have an account? '),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text('Sign In'),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => LoginPage()));
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => LoginPage(),
+                          //   ),
+                          // );
+                        },
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(color: kPrimaryColor),
+                        ),
                       ),
                     ],
                   ),
