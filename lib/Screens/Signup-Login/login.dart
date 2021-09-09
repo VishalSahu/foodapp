@@ -14,6 +14,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController? emailController = TextEditingController();
   TextEditingController? passwordController = TextEditingController();
   bool visible = true;
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
@@ -121,7 +122,18 @@ class _LoginPageState extends State<LoginPage> {
                         password: passwordController,
                         context: context);
                   },
-                  child: Text('Login'),
+                  child: loginAuthProvider.loading == false
+                      ? Text('Login')
+                      : Center(
+                          child: SizedBox(
+                            height: 22,
+                            width: 22,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 3,
+                            ),
+                          ),
+                        ),
                   style: TextButton.styleFrom(
                       textStyle: TextStyle(
                         fontSize: 20,

@@ -61,6 +61,8 @@ class LoginAuthProvider with ChangeNotifier {
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         print(e);
+        loading = false;
+        notifyListeners();
         if (e.code == 'user-not-found') {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
