@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/Constants/constants.dart';
+import 'package:foodapp/Screens/Signup-Login/components/sign_up_auth.dart';
+import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -9,12 +11,13 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  bool visibility = false;
+  bool visibility = true;
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    SignupAuthProvider signupAuthProvider = Provider.of(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -58,7 +61,7 @@ class _SignUpState extends State<SignUp> {
                         BoxShadow(
                           offset: Offset(0, 5),
                           blurRadius: 25,
-                          color: Colors.grey.withOpacity(0.15),
+                          color: Colors.grey.withOpacity(0.1),
                         ),
                       ],
                     ),
@@ -70,7 +73,7 @@ class _SignUpState extends State<SignUp> {
                     padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                     child: TextFormField(
                       controller: email,
-                      validator: (value) {},
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(height: 1.5),
@@ -85,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                         BoxShadow(
                           offset: Offset(0, 5),
                           blurRadius: 25,
-                          color: Colors.grey.withOpacity(0.15),
+                          color: Colors.grey.withOpacity(0.1),
                         ),
                       ],
                     ),
@@ -97,6 +100,7 @@ class _SignUpState extends State<SignUp> {
                     padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                     child: TextFormField(
                       controller: password,
+                      keyboardType: TextInputType.visiblePassword,
                       obscureText: visibility,
                       decoration: InputDecoration(
                         hintText: 'Password',
@@ -120,7 +124,7 @@ class _SignUpState extends State<SignUp> {
                         BoxShadow(
                           offset: Offset(0, 5),
                           blurRadius: 25,
-                          color: Colors.grey.withOpacity(0.15),
+                          color: Colors.grey.withOpacity(0.1),
                         ),
                       ],
                     ),
@@ -129,8 +133,25 @@ class _SignUpState extends State<SignUp> {
                     height: size.width * 0.10,
                   ),
                   TextButton(
-                    onPressed: () {},
-                    child: Text('Sign Up'),
+                    onPressed: () {
+                      signupAuthProvider.signupvalidation(
+                          fullname: name,
+                          email: email,
+                          password: password,
+                          context: context);
+                    },
+                    child: signupAuthProvider.loading == false
+                        ? Text('Sign Up')
+                        : Center(
+                            child: SizedBox(
+                              height: 22,
+                              width: 22,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 3,
+                              ),
+                            ),
+                          ),
                     style: TextButton.styleFrom(
                         textStyle: TextStyle(
                           fontSize: 20,
