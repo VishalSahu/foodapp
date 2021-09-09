@@ -32,7 +32,9 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kBackgroundColor,
           textTheme:
               GoogleFonts.comfortaaTextTheme(Theme.of(context).textTheme),
-          iconTheme: IconThemeData(color: Colors.green),
+          appBarTheme: AppBarTheme(
+              color: kBackgroundColor,
+              iconTheme: IconThemeData(color: kPrimaryColor)),
         ),
         home: AnimatedSplashScreen(
           splash: WelcomeScreen(),

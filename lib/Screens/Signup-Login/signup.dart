@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:foodapp/Constants/constants.dart';
 import 'package:foodapp/Screens/Signup-Login/components/sign_up_auth.dart';
 import 'package:provider/provider.dart';
@@ -20,19 +21,21 @@ class _SignUpState extends State<SignUp> {
     SignupAuthProvider signupAuthProvider = Provider.of(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        systemOverlayStyle:
+            SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      ),
       body: SafeArea(
-        child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: size.width * 0.07, vertical: 40),
-          child: SingleChildScrollView(
-            child: Form(
+        child: SingleChildScrollView(
+          child: Form(
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.07, vertical: 40),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(
-                    height: size.width * 0.065,
-                  ),
                   Text(
                     'Welcome to GoFood!',
                     style: TextStyle(
@@ -50,7 +53,10 @@ class _SignUpState extends State<SignUp> {
                       decoration: InputDecoration(
                         hintText: 'Name',
                         hintStyle: TextStyle(height: 1.5),
-                        prefixIcon: new Icon(Icons.person),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: kPrimaryColor,
+                        ),
                         border: InputBorder.none,
                       ),
                     ),
@@ -77,7 +83,10 @@ class _SignUpState extends State<SignUp> {
                       decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: TextStyle(height: 1.5),
-                        prefixIcon: new Icon(Icons.email),
+                        prefixIcon: new Icon(
+                          Icons.email,
+                          color: kPrimaryColor,
+                        ),
                         border: InputBorder.none,
                       ),
                     ),
@@ -105,9 +114,12 @@ class _SignUpState extends State<SignUp> {
                       decoration: InputDecoration(
                         hintText: 'Password',
                         hintStyle: TextStyle(height: 1.5),
-                        prefixIcon: new Icon(Icons.lock),
+                        prefixIcon: new Icon(
+                          Icons.lock,
+                          color: kPrimaryColor,
+                        ),
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.visibility),
+                          icon: Icon(Icons.visibility, color: kPrimaryColor),
                           onPressed: () {
                             setState(() {
                               visibility = !visibility;
